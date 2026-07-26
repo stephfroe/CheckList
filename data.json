@@ -274,10 +274,12 @@
           "id": 1785062810453,
           "title": "Schlafsack",
           "vorhanden": false,
-          "verantwortlich": "",
+          "verantwortlich": "Jeder",
           "woBesorgen": "",
           "notizen": "",
-          "schemaValues": {},
+          "schemaValues": {
+            "f_1785062581798": "4"
+          },
           "localFields": [],
           "isEditing": false
         }
