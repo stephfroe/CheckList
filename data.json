@@ -50,8 +50,10 @@
           "vorhanden": false,
           "verantwortlich": "Kolja",
           "woBesorgen": "",
-          "notizen": "",
-          "schemaValues": {},
+          "notizen": "Mit Gasflasche",
+          "schemaValues": {
+            "f_1785062581798": ""
+          },
           "localFields": [],
           "isEditing": false
         },
