@@ -154,6 +154,26 @@
 
     .hidden { display: none !important; }
 
+    /* REPORTING & FILTER BAR */
+    .filter-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px;
+      margin-bottom: 12px;
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px;
+      align-items: flex-end;
+    }
+
+    @media (max-width: 600px) {
+      .filter-grid { grid-template-columns: 1fr; }
+    }
+
     /* KOMPAKTE ITEM CARD STYLES */
     .items-grid {
       display: grid;
@@ -175,13 +195,8 @@
       justify-content: space-between;
     }
 
-    .item-card.is-available {
-      border-left: 4px solid var(--success);
-    }
-
-    .item-card.is-missing {
-      border-left: 4px solid var(--danger);
-    }
+    .item-card.is-available { border-left: 4px solid var(--success); }
+    .item-card.is-missing { border-left: 4px solid var(--danger); }
 
     .item-header {
       display: flex;
@@ -190,11 +205,7 @@
       gap: 6px;
     }
 
-    .item-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      word-break: break-word;
-    }
+    .item-title { font-size: 0.9rem; font-weight: 600; word-break: break-word; }
 
     .meta-badges {
       display: flex;
@@ -213,7 +224,6 @@
       border: 1px solid var(--border);
     }
 
-    /* KLAMMERN FÜR STATUS */
     .bracket-status {
       font-weight: 700;
       font-size: 0.75rem;
@@ -221,17 +231,8 @@
       border-radius: 3px;
     }
 
-    .bracket-success {
-      color: var(--success);
-      border: 1px solid var(--success);
-      background: rgba(16, 185, 129, 0.08);
-    }
-
-    .bracket-danger {
-      color: var(--danger);
-      border: 1px solid var(--danger);
-      background: rgba(239, 68, 68, 0.08);
-    }
+    .bracket-success { color: var(--success); border: 1px solid var(--success); background: rgba(16, 185, 129, 0.08); }
+    .bracket-danger { color: var(--danger); border: 1px solid var(--danger); background: rgba(239, 68, 68, 0.08); }
 
     .item-details {
       margin-top: 4px;
@@ -256,27 +257,17 @@
       accent-color: var(--primary);
     }
 
-    .edit-form {
-      margin-top: 6px;
-      padding-top: 6px;
-      border-top: 1px solid var(--border);
-    }
+    .edit-form { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .status-bar { font-size: 0.75rem; color: var(--text-muted); }
+    .flex-row { display: flex; gap: 6px; align-items: center; }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
-    }
-
-    .status-bar {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-
-    .flex-row {
-      display: flex;
-      gap: 6px;
-      align-items: center;
+    /* DRUCK / PDF STYLES */
+    @media print {
+      body { background: white; color: black; max-width: 100%; padding: 0; }
+      header, #config-card, .filter-card, .btn, .theme-toggle, .status-bar, hr, .flex-row input, .checkbox-label input { display: none !important; }
+      .card { border: 1px solid #ccc; box-shadow: none; margin-bottom: 10px; page-break-inside: avoid; }
+      .item-card { border: 1px solid #eee; page-break-inside: avoid; }
     }
   </style>
 </head>
@@ -321,9 +312,33 @@
     
     <hr style="border: 0; border-top: 1px solid var(--border); margin: 8px 0;">
 
+    <!-- REPORTING & FILTER BEREICH -->
+    <div class="filter-card">
+      <div style="font-weight: 600; font-size: 0.8rem; margin-bottom: 4px;">🔍 Report / Filter</div>
+      <div class="filter-grid">
+        <div>
+          <label style="margin-top:0;">Status</label>
+          <select id="filter-status" onchange="render()">
+            <option value="all">Alle Einträge</option>
+            <option value="missing">Nur FEHLENDE [ ✕ ]</option>
+            <option value="available">Nur VORHANDENE [ ✓ ]</option>
+          </select>
+        </div>
+        <div>
+          <label style="margin-top:0;">Verantwortliche Person</label>
+          <select id="filter-person" onchange="render()">
+            <option value="all">Alle Personen</option>
+          </select>
+        </div>
+        <div>
+          <button class="btn btn-secondary" style="width: 100%; font-size: 0.8rem;" onclick="window.print()">🖨️ Drucken / PDF</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Neue Liste anlegen -->
     <div class="flex-row" style="margin-bottom: 10px;">
-      <input type="text" id="new-list-name" placeholder="Neue Liste (z. B. Party-Einkauf)..." onkeydown="if(event.key==='Enter') addChecklist()">
+      <input type="text" id="new-list-name" placeholder="Neue Liste erstellet (z. B. Party-Einkauf)..." onkeydown="if(event.key==='Enter') addChecklist()">
       <button class="btn btn-sm" onclick="addChecklist()">+ Liste</button>
     </div>
 
@@ -434,6 +449,7 @@
 
         appData = JSON.parse(content);
         setStatus('Aktualisiert.');
+        updatePersonFilterDropdown();
         render();
       } catch (err) {
         console.error(err);
@@ -473,10 +489,35 @@
         const resData = await response.json();
         fileSha = resData.content.sha;
         setStatus('Gespeichert!');
+        updatePersonFilterDropdown();
       } catch (err) {
         console.error(err);
         setStatus(`Fehler beim Speichern: ${err.message}`);
       }
+    }
+
+    // BEFÜLLT DAS PERSONEN-DROPDOWN AUTOMATISCH
+    function updatePersonFilterDropdown() {
+      const personSelect = document.getElementById('filter-person');
+      const currentSelected = personSelect.value;
+      
+      const persons = new Set();
+      appData.lists.forEach(l => {
+        l.items.forEach(i => {
+          if (i.verantwortlich && i.verantwortlich.trim()) {
+            persons.add(i.verantwortlich.trim());
+          }
+        });
+      });
+
+      personSelect.innerHTML = '<option value="all">Alle Personen</option>';
+      persons.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p;
+        opt.innerText = p;
+        if (p === currentSelected) opt.selected = true;
+        personSelect.appendChild(opt);
+      });
     }
 
     function addChecklist() {
@@ -503,7 +544,6 @@
       saveDataToGitHub();
     }
 
-    // DIREKTES ERSTELLEN MIT TITEL
     function addItemDirect(listId) {
       const input = document.getElementById(`input-add-item-${listId}`);
       const title = input.value.trim();
@@ -609,25 +649,46 @@
       const container = document.getElementById('checklists-container');
       container.innerHTML = '';
 
+      const filterStatus = document.getElementById('filter-status').value;
+      const filterPerson = document.getElementById('filter-person').value;
+
       if (appData.lists.length === 0) {
         container.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 10px 0;">Keine Checklisten vorhanden.</p>';
         return;
       }
 
       appData.lists.forEach(list => {
+        // FILTER LOGIK FÜR EINTRÄGE
+        const filteredItems = list.items.filter(item => {
+          // Status Filter
+          if (filterStatus === 'missing' && item.vorhanden) return false;
+          if (filterStatus === 'available' && !item.vorhanden) return false;
+
+          // Person Filter
+          if (filterPerson !== 'all' && (item.verantwortlich || '').trim().toLowerCase() !== filterPerson.toLowerCase()) {
+            return false;
+          }
+
+          return true;
+        });
+
+        // Wenn gefiltert wird und in dieser Liste keine passenden Einträge sind -> Liste nicht anzeigen
+        if ((filterStatus !== 'all' || filterPerson !== 'all') && filteredItems.length === 0) {
+          return;
+        }
+
         const listEl = document.createElement('div');
         listEl.className = 'card';
 
         let itemsHtml = '';
 
-        if (list.items.length === 0) {
+        if (filteredItems.length === 0) {
           itemsHtml = '<p style="font-size:0.8rem; color:var(--text-muted); text-align:center; margin: 8px 0;">Keine Einträge vorhanden.</p>';
         } else {
           let itemsCards = '';
-          list.items.forEach(item => {
+          filteredItems.forEach(item => {
             const isAvailClass = item.vorhanden ? 'is-available' : 'is-missing';
             
-            // KLAMMERN BEZEICHNUNG (ROT / GRÜN)
             let statusBracket = item.vorhanden 
               ? `<span class="bracket-status bracket-success">[ ✓ Vorhanden ]</span>`
               : `<span class="bracket-status bracket-danger">[ ✕ Fehlt ]</span>`;
@@ -652,7 +713,6 @@
             }
 
             if (item.isEditing) {
-              // EDIT MODUS
               let schemaFieldsInputs = '';
               if (list.schema) {
                 list.schema.forEach(f => {
@@ -725,7 +785,6 @@
                 </div>
               `;
             } else {
-              // ANSICHTS MODUS
               itemsCards += `
                 <div class="item-card ${isAvailClass}">
                   <div>
@@ -761,7 +820,6 @@
           </div>
           <div>${itemsHtml}</div>
           
-          <!-- SCHNELLES ERSTELLEN VON EINTRÄGEN -->
           <div class="flex-row" style="margin-top: 8px;">
             <input type="text" id="input-add-item-${list.id}" placeholder="Eintrag hinzufügen..." onkeydown="if(event.key==='Enter') addItemDirect(${list.id})">
             <button class="btn btn-sm" onclick="addItemDirect(${list.id})">+</button>
