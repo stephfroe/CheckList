@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Shared Checklists</title>
+  <title>Checklisten</title>
   <style>
     :root {
       --bg: #f8fafc;
@@ -14,11 +14,10 @@
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
       --danger: #ef4444;
-      --danger-hover: #dc2626;
       --success: #10b981;
-      --badge-bg: #e2e8f0;
+      --badge-bg: #f1f5f9;
       --input-bg: #ffffff;
-      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
 
     @media (prefers-color-scheme: dark) {
@@ -31,11 +30,10 @@
         --primary: #3b82f6;
         --primary-hover: #60a5fa;
         --danger: #f87171;
-        --danger-hover: #ef4444;
         --success: #34d399;
-        --badge-bg: #334155;
+        --badge-bg: #0f172a;
         --input-bg: #0f172a;
-        --shadow: 0 4px 12px rgba(0,0,0,0.3);
+        --shadow: 0 2px 6px rgba(0,0,0,0.3);
       }
     }
 
@@ -48,11 +46,10 @@
       --primary: #3b82f6;
       --primary-hover: #60a5fa;
       --danger: #f87171;
-      --danger-hover: #ef4444;
       --success: #34d399;
-      --badge-bg: #334155;
+      --badge-bg: #0f172a;
       --input-bg: #0f172a;
-      --shadow: 0 4px 12px rgba(0,0,0,0.3);
+      --shadow: 0 2px 6px rgba(0,0,0,0.3);
     }
 
     [data-theme="light"] {
@@ -64,11 +61,10 @@
       --primary: #2563eb;
       --primary-hover: #1d4ed8;
       --danger: #ef4444;
-      --danger-hover: #dc2626;
       --success: #10b981;
-      --badge-bg: #e2e8f0;
+      --badge-bg: #f1f5f9;
       --input-bg: #ffffff;
-      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+      --shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
 
     * { box-sizing: border-box; }
@@ -77,182 +73,209 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg);
       color: var(--text);
-      max-width: 850px;
+      max-width: 900px;
       margin: 0 auto;
-      padding: 12px;
-      line-height: 1.5;
+      padding: 8px;
+      line-height: 1.3;
     }
 
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
-      padding: 4px 0;
+      margin-bottom: 10px;
     }
 
-    h1 { font-size: 1.4rem; margin: 0; }
+    h1 { font-size: 1.2rem; margin: 0; }
 
     .theme-toggle {
       background: var(--card);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 6px 12px;
-      border-radius: 20px;
+      padding: 4px 8px;
+      border-radius: 16px;
       cursor: pointer;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
     }
 
     .card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 16px;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 12px;
       box-shadow: var(--shadow);
     }
 
     label {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       font-weight: 600;
-      margin-top: 10px;
-      margin-bottom: 4px;
+      margin-top: 6px;
+      margin-bottom: 2px;
       color: var(--text-muted);
     }
 
     input[type="text"], input[type="password"], textarea, select {
       width: 100%;
-      padding: 10px 12px;
+      padding: 6px 8px;
       background-color: var(--input-bg);
       color: var(--text);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.95rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
     }
 
-    textarea { min-height: 70px; resize: vertical; }
+    textarea { min-height: 45px; resize: vertical; }
 
     .btn {
       background-color: var(--primary);
       color: white;
       border: none;
-      padding: 10px 16px;
-      border-radius: 8px;
+      padding: 6px 12px;
+      border-radius: 6px;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
+      gap: 4px;
       touch-action: manipulation;
     }
 
     .btn:active { opacity: 0.8; }
     .btn-danger { background-color: var(--danger); }
-    .btn-secondary { background-color: var(--badge-bg); color: var(--text); }
-    .btn-sm { padding: 6px 10px; font-size: 0.8rem; border-radius: 6px; }
+    .btn-secondary { background-color: var(--badge-bg); color: var(--text); border: 1px solid var(--border); }
+    .btn-sm { padding: 3px 6px; font-size: 0.75rem; border-radius: 4px; }
 
     .hidden { display: none !important; }
 
-    /* ITEM CARD STYLES */
+    /* KOMPAKTE ITEM CARD STYLES */
+    .items-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+    }
+
+    @media (min-width: 650px) {
+      .items-grid { grid-template-columns: 1fr 1fr; }
+    }
+
     .item-card {
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px;
-      margin-bottom: 10px;
+      border-radius: 6px;
+      padding: 6px 8px;
       background: var(--card);
-      transition: border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .item-card.is-available {
-      border-left: 5px solid var(--success);
+      border-left: 4px solid var(--success);
+    }
+
+    .item-card.is-missing {
+      border-left: 4px solid var(--danger);
     }
 
     .item-header {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 6px;
     }
 
     .item-title {
-      font-size: 1.05rem;
+      font-size: 0.9rem;
       font-weight: 600;
-      margin-bottom: 6px;
+      word-break: break-word;
     }
 
     .meta-badges {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 6px;
+      gap: 4px;
+      margin-top: 3px;
     }
 
     .badge {
       background: var(--badge-bg);
       color: var(--text);
-      padding: 3px 8px;
-      border-radius: 6px;
-      font-size: 0.75rem;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 0.7rem;
       font-weight: 500;
+      border: 1px solid var(--border);
     }
 
-    .badge-success { background: rgba(16, 185, 129, 0.2); color: var(--success); }
-    .badge-danger { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+    /* KLAMMERN FÜR STATUS */
+    .bracket-status {
+      font-weight: 700;
+      font-size: 0.75rem;
+      padding: 1px 4px;
+      border-radius: 3px;
+    }
+
+    .bracket-success {
+      color: var(--success);
+      border: 1px solid var(--success);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    .bracket-danger {
+      color: var(--danger);
+      border: 1px solid var(--danger);
+      background: rgba(239, 68, 68, 0.08);
+    }
 
     .item-details {
-      margin-top: 8px;
-      font-size: 0.85rem;
+      margin-top: 4px;
+      font-size: 0.75rem;
       color: var(--text-muted);
       border-top: 1px dashed var(--border);
-      padding-top: 8px;
+      padding-top: 4px;
     }
 
     .checkbox-label {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       cursor: pointer;
       user-select: none;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
     }
 
     .checkbox-label input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       accent-color: var(--primary);
     }
 
-    /* EDIT FORM INSIDE ITEM */
     .edit-form {
-      margin-top: 12px;
-      padding-top: 12px;
+      margin-top: 6px;
+      padding-top: 6px;
       border-top: 1px solid var(--border);
     }
 
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    @media (max-width: 600px) {
-      .grid-2 { grid-template-columns: 1fr; }
+      gap: 6px;
     }
 
     .status-bar {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-muted);
     }
 
     .flex-row {
       display: flex;
-      gap: 8px;
+      gap: 6px;
       align-items: center;
     }
   </style>
@@ -268,30 +291,27 @@
 
   <!-- CONFIG SECTION -->
   <div id="config-card" class="card">
-    <h2 style="margin-top:0;">GitHub Konfiguration</h2>
-    <p style="font-size: 0.85rem; color: var(--text-muted);">
-      Gib hier deinen GitHub Personal Access Token (PAT) sowie dein Repository an.
-    </p>
+    <h2 style="margin-top:0; font-size: 1rem;">GitHub Konfiguration</h2>
     <label>GitHub Personal Access Token (PAT)</label>
     <input type="password" id="cfg-token" placeholder="ghp_xxxxxxxxxxxx">
 
     <div class="grid-2">
       <div>
-        <label>GitHub Owner (User/Orga)</label>
-        <input type="text" id="cfg-owner" placeholder="z. B. octocat">
+        <label>GitHub Owner</label>
+        <input type="text" id="cfg-owner" placeholder="z. B. stephfroe">
       </div>
       <div>
         <label>Repository Name</label>
-        <input type="text" id="cfg-repo" placeholder="z. B. mein-checklisten-repo">
+        <input type="text" id="cfg-repo" placeholder="z. B. CheckList">
       </div>
     </div>
 
-    <button class="btn" style="width: 100%; margin-top: 16px;" onclick="saveConfig()">Verbinden & Laden</button>
+    <button class="btn" style="width: 100%; margin-top: 10px;" onclick="saveConfig()">Verbinden & Laden</button>
   </div>
 
   <!-- APP SECTION -->
   <div id="app-card" class="card hidden">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
       <span id="sync-status" class="status-bar">Bereit</span>
       <div class="flex-row">
         <button class="btn btn-secondary btn-sm" onclick="loadDataFromGitHub()">🔄 Aktualisieren</button>
@@ -299,12 +319,12 @@
       </div>
     </div>
     
-    <hr style="border: 0; border-top: 1px solid var(--border); margin: 16px 0;">
+    <hr style="border: 0; border-top: 1px solid var(--border); margin: 8px 0;">
 
     <!-- Neue Liste anlegen -->
-    <div class="flex-row" style="margin-bottom: 20px;">
-      <input type="text" id="new-list-name" placeholder="Neue Liste erstellen (z. B. Party-Einkauf)...">
-      <button class="btn" onclick="addChecklist()">+ Liste</button>
+    <div class="flex-row" style="margin-bottom: 10px;">
+      <input type="text" id="new-list-name" placeholder="Neue Liste (z. B. Party-Einkauf)..." onkeydown="if(event.key==='Enter') addChecklist()">
+      <button class="btn btn-sm" onclick="addChecklist()">+ Liste</button>
     </div>
 
     <!-- Container für Listen -->
@@ -316,7 +336,6 @@
     let appData = { lists: [] };
     let fileSha = null;
 
-    // --- THEME MANAGEMENT ---
     function initTheme() {
       const savedTheme = localStorage.getItem('theme') || 'system';
       document.documentElement.setAttribute('data-theme', savedTheme);
@@ -342,7 +361,6 @@
       else { icon.innerText = '🌓'; label.innerText = 'Auto'; }
     }
 
-    // --- INITIALISIERUNG ---
     window.onload = () => {
       initTheme();
       const savedConfig = localStorage.getItem('gh_checklist_config');
@@ -385,10 +403,9 @@
       document.getElementById('sync-status').innerText = text;
     }
 
-    // --- GITHUB API ---
     async function loadDataFromGitHub() {
       setStatus('Lade Daten...');
-      const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}`;
+      const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}?t=${Date.now()}`;
 
       try {
         const response = await fetch(url, {
@@ -401,7 +418,7 @@
         if (response.status === 404) {
           appData = { lists: [] };
           fileSha = null;
-          setStatus('Keine data.json vorhanden. Neue wird beim Speichern angelegt.');
+          setStatus('Keine data.json vorhanden.');
           render();
           return;
         }
@@ -420,7 +437,7 @@
         render();
       } catch (err) {
         console.error(err);
-        setStatus(`Fehler beim Laden: ${err.message}`);
+        setStatus(`Fehler: ${err.message}`);
       }
     }
 
@@ -434,7 +451,7 @@
       }));
 
       const body = {
-        message: 'Update checklists via WebApp',
+        message: 'Update checklists',
         content: contentEncoded
       };
 
@@ -462,7 +479,6 @@
       }
     }
 
-    // --- APP LOGIK ---
     function addChecklist() {
       const input = document.getElementById('new-list-name');
       const title = input.value.trim();
@@ -471,7 +487,7 @@
       appData.lists.push({
         id: Date.now(),
         title: title,
-        schema: [], // Globale Zusatzfelder für diese Liste
+        schema: [],
         items: []
       });
 
@@ -487,22 +503,29 @@
       saveDataToGitHub();
     }
 
-    function addItem(listId) {
+    // DIREKTES ERSTELLEN MIT TITEL
+    function addItemDirect(listId) {
+      const input = document.getElementById(`input-add-item-${listId}`);
+      const title = input.value.trim();
+      if (!title) return;
+
       const list = appData.lists.find(l => l.id === listId);
       const newItem = {
         id: Date.now(),
-        title: 'Neuer Eintrag',
+        title: title,
         vorhanden: false,
         verantwortlich: '',
         woBesorgen: '',
         notizen: '',
-        schemaValues: {}, // Werte für Listen-Schema-Felder
-        localFields: [],  // Lokale Custom Fields
-        isEditing: true   // Direkt im Bearbeitungsmodus öffnen
+        schemaValues: {},
+        localFields: [],
+        isEditing: false
       };
 
       list.items.push(newItem);
+      input.value = '';
       render();
+      saveDataToGitHub();
     }
 
     function toggleVorhanden(listId, itemId) {
@@ -529,7 +552,6 @@
       item.woBesorgen = document.getElementById(`edit-where-${itemId}`).value.trim();
       item.notizen = document.getElementById(`edit-notes-${itemId}`).value.trim();
 
-      // Schema-Werte speichern
       if (list.schema) {
         list.schema.forEach(field => {
           const el = document.getElementById(`edit-schema-${itemId}-${field.id}`);
@@ -539,7 +561,6 @@
         });
       }
 
-      // Lokale Felder speichern
       if (item.localFields) {
         item.localFields.forEach(field => {
           const el = document.getElementById(`edit-local-${itemId}-${field.id}`);
@@ -561,13 +582,12 @@
       saveDataToGitHub();
     }
 
-    // DYNAMISCHES FELD HINZUFÜGEN
     function promptAddCustomField(listId, itemId) {
-      const fieldName = prompt('Name des neuen Feldes (z. B. "Menge" oder "Dringend"):');
+      const fieldName = prompt('Name des neuen Feldes (z. B. "Menge"):');
       if (!fieldName) return;
 
-      const fieldType = confirm('Soll es ein Ja/Nein-Schalter sein? (Abbrechen drücken für einfaches Textfeld)') ? 'boolean' : 'text';
-      const applyToAll = confirm(`Soll das Feld "${fieldName}" für ALLE Einträge in dieser Liste gelten?\n\n[OK] = Für alle Einträge dieser Liste\n[Abbrechen] = Nur für diesen konkreten Eintrag`);
+      const fieldType = confirm('Ja/Nein-Schalter? (Abbrechen für Textfeld)') ? 'boolean' : 'text';
+      const applyToAll = confirm(`Feld "${fieldName}" für ALLE Einträge in dieser Liste übernehmen?`);
 
       const fieldId = 'f_' + Date.now();
 
@@ -585,68 +605,67 @@
       render();
     }
 
-    // --- RENDER FUNCTION ---
     function render() {
       const container = document.getElementById('checklists-container');
       container.innerHTML = '';
 
       if (appData.lists.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 20px 0;">Noch keine Checklisten vorhanden.</p>';
+        container.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 10px 0;">Keine Checklisten vorhanden.</p>';
         return;
       }
 
       appData.lists.forEach(list => {
         const listEl = document.createElement('div');
         listEl.className = 'card';
-        listEl.style.boxShadow = 'none';
 
         let itemsHtml = '';
 
         if (list.items.length === 0) {
-          itemsHtml = '<p style="font-size:0.85rem; color:var(--text-muted); text-align:center; margin: 15px 0;">Keine Einträge in dieser Liste.</p>';
+          itemsHtml = '<p style="font-size:0.8rem; color:var(--text-muted); text-align:center; margin: 8px 0;">Keine Einträge vorhanden.</p>';
         } else {
+          let itemsCards = '';
           list.items.forEach(item => {
-            const isAvailClass = item.vorhanden ? 'is-available' : '';
+            const isAvailClass = item.vorhanden ? 'is-available' : 'is-missing';
             
-            // Render Badges / Meta
+            // KLAMMERN BEZEICHNUNG (ROT / GRÜN)
+            let statusBracket = item.vorhanden 
+              ? `<span class="bracket-status bracket-success">[ ✓ Vorhanden ]</span>`
+              : `<span class="bracket-status bracket-danger">[ ✕ Fehlt ]</span>`;
+
             let badges = '';
-            if (item.vorhanden) badges += `<span class="badge badge-success">✓ Vorhanden</span>`;
-            else badges += `<span class="badge badge-danger">✕ Fehlt</span>`;
             if (item.verantwortlich) badges += `<span class="badge">👤 ${escapeHtml(item.verantwortlich)}</span>`;
             if (item.woBesorgen) badges += `<span class="badge">📍 ${escapeHtml(item.woBesorgen)}</span>`;
 
-            // Schema Felder
             if (list.schema) {
               list.schema.forEach(f => {
                 const val = item.schemaValues ? item.schemaValues[f.id] : null;
-                if (f.type === 'boolean' && val) badges += `<span class="badge">🔹 ${escapeHtml(f.label)}: Ja</span>`;
+                if (f.type === 'boolean' && val) badges += `<span class="badge">🔹 ${escapeHtml(f.label)}</span>`;
                 else if (f.type === 'text' && val) badges += `<span class="badge">🔹 ${escapeHtml(f.label)}: ${escapeHtml(val)}</span>`;
               });
             }
 
-            // Lokale Felder
             if (item.localFields) {
               item.localFields.forEach(f => {
-                if (f.type === 'boolean' && f.value) badges += `<span class="badge">🔸 ${escapeHtml(f.label)}: Ja</span>`;
+                if (f.type === 'boolean' && f.value) badges += `<span class="badge">🔸 ${escapeHtml(f.label)}</span>`;
                 else if (f.type === 'text' && f.value) badges += `<span class="badge">🔸 ${escapeHtml(f.label)}: ${escapeHtml(f.value)}</span>`;
               });
             }
 
             if (item.isEditing) {
-              // EDIT MODUS FORMULAR
+              // EDIT MODUS
               let schemaFieldsInputs = '';
               if (list.schema) {
                 list.schema.forEach(f => {
                   const val = item.schemaValues ? item.schemaValues[f.id] : '';
                   if (f.type === 'boolean') {
                     schemaFieldsInputs += `
-                      <label class="checkbox-label" style="margin-top:10px;">
-                        <input type="checkbox" id="edit-schema-${item.id}-${f.id}" ${val ? 'checked' : ''}> ${escapeHtml(f.label)} (Liste)
+                      <label class="checkbox-label" style="margin-top:4px;">
+                        <input type="checkbox" id="edit-schema-${item.id}-${f.id}" ${val ? 'checked' : ''}> ${escapeHtml(f.label)}
                       </label>`;
                   } else {
                     schemaFieldsInputs += `
                       <div>
-                        <label>${escapeHtml(f.label)} (Liste)</label>
+                        <label>${escapeHtml(f.label)}</label>
                         <input type="text" id="edit-schema-${item.id}-${f.id}" value="${escapeHtml(val || '')}">
                       </div>`;
                   }
@@ -658,21 +677,21 @@
                 item.localFields.forEach(f => {
                   if (f.type === 'boolean') {
                     localFieldsInputs += `
-                      <label class="checkbox-label" style="margin-top:10px;">
-                        <input type="checkbox" id="edit-local-${item.id}-${f.id}" ${f.value ? 'checked' : ''}> ${escapeHtml(f.label)} (Lokal)
+                      <label class="checkbox-label" style="margin-top:4px;">
+                        <input type="checkbox" id="edit-local-${item.id}-${f.id}" ${f.value ? 'checked' : ''}> ${escapeHtml(f.label)}
                       </label>`;
                   } else {
                     localFieldsInputs += `
                       <div>
-                        <label>${escapeHtml(f.label)} (Lokal)</label>
+                        <label>${escapeHtml(f.label)}</label>
                         <input type="text" id="edit-local-${item.id}-${f.id}" value="${escapeHtml(f.value || '')}">
                       </div>`;
                   }
                 });
               }
 
-              itemsHtml += `
-                <div class="item-card">
+              itemsCards += `
+                <div class="item-card" style="grid-column: 1 / -1;">
                   <strong>Eintrag bearbeiten</strong>
                   <div class="edit-form">
                     <label>Titel / Name</label>
@@ -681,11 +700,11 @@
                     <div class="grid-2">
                       <div>
                         <label>Verantwortlich</label>
-                        <input type="text" id="edit-resp-${item.id}" value="${escapeHtml(item.verantwortlich || '')}" placeholder="z. B. Alex">
+                        <input type="text" id="edit-resp-${item.id}" value="${escapeHtml(item.verantwortlich || '')}">
                       </div>
                       <div>
                         <label>Wo zu besorgen</label>
-                        <input type="text" id="edit-where-${item.id}" value="${escapeHtml(item.woBesorgen || '')}" placeholder="z. B. Supermarkt">
+                        <input type="text" id="edit-where-${item.id}" value="${escapeHtml(item.woBesorgen || '')}">
                       </div>
                     </div>
 
@@ -693,13 +712,13 @@
                     ${localFieldsInputs}
 
                     <label>Notizen</label>
-                    <textarea id="edit-notes-${item.id}" placeholder="Zusätzliche Infos...">${escapeHtml(item.notizen || '')}</textarea>
+                    <textarea id="edit-notes-${item.id}">${escapeHtml(item.notizen || '')}</textarea>
 
-                    <div style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between;">
-                      <button class="btn btn-secondary btn-sm" onclick="promptAddCustomField(${list.id}, ${item.id})">+ Feld hinzufügen</button>
+                    <div style="margin-top: 8px; display: flex; gap: 6px; justify-content: space-between; align-items: center;">
+                      <button class="btn btn-secondary btn-sm" onclick="promptAddCustomField(${list.id}, ${item.id})">+ Feld</button>
                       <div class="flex-row">
                         <button class="btn btn-danger btn-sm" onclick="deleteItem(${list.id}, ${item.id})">Löschen</button>
-                        <button class="btn btn-sm" onclick="saveItem(${list.id}, ${item.id})">Fertig / Speichern</button>
+                        <button class="btn btn-sm" onclick="saveItem(${list.id}, ${item.id})">Speichern</button>
                       </div>
                     </div>
                   </div>
@@ -707,37 +726,46 @@
               `;
             } else {
               // ANSICHTS MODUS
-              itemsHtml += `
+              itemsCards += `
                 <div class="item-card ${isAvailClass}">
-                  <div class="item-header">
-                    <div style="flex-grow:1;">
+                  <div>
+                    <div class="item-header">
                       <div class="item-title">${escapeHtml(item.title)}</div>
-                      <div class="meta-badges">${badges}</div>
+                      <button class="btn btn-secondary btn-sm" onclick="toggleEdit(${list.id}, ${item.id})">✏️</button>
                     </div>
-                    <button class="btn btn-secondary btn-sm" onclick="toggleEdit(${list.id}, ${item.id})">✏️ Bearbeiten</button>
+                    <div class="meta-badges">
+                      ${statusBracket}
+                      ${badges}
+                    </div>
+                    ${item.notizen ? `<div class="item-details">📝 ${escapeHtml(item.notizen)}</div>` : ''}
                   </div>
 
-                  ${item.notizen ? `<div class="item-details">📝 ${escapeHtml(item.notizen)}</div>` : ''}
-
-                  <div style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                  <div style="margin-top: 6px; display: flex; justify-content: space-between; align-items: center;">
                     <label class="checkbox-label">
                       <input type="checkbox" ${item.vorhanden ? 'checked' : ''} onchange="toggleVorhanden(${list.id}, ${item.id})">
-                      Ist vorhanden
+                      Vorhanden
                     </label>
                   </div>
                 </div>
               `;
             }
           });
+
+          itemsHtml = `<div class="items-grid">${itemsCards}</div>`;
         }
 
         listEl.innerHTML = `
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 10px;">
-            <h2 style="margin: 0; font-size: 1.2rem;">${escapeHtml(list.title)}</h2>
-            <button class="btn btn-danger btn-sm" onclick="deleteList(${list.id})">Liste löschen</button>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 6px;">
+            <h2 style="margin: 0; font-size: 1.05rem;">${escapeHtml(list.title)}</h2>
+            <button class="btn btn-danger btn-sm" onclick="deleteList(${list.id})">Löschen</button>
           </div>
           <div>${itemsHtml}</div>
-          <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;" onclick="addItem(${list.id})">+ Neuer Eintrag</button>
+          
+          <!-- SCHNELLES ERSTELLEN VON EINTRÄGEN -->
+          <div class="flex-row" style="margin-top: 8px;">
+            <input type="text" id="input-add-item-${list.id}" placeholder="Eintrag hinzufügen..." onkeydown="if(event.key==='Enter') addItemDirect(${list.id})">
+            <button class="btn btn-sm" onclick="addItemDirect(${list.id})">+</button>
+          </div>
         `;
 
         container.appendChild(listEl);
