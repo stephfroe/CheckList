@@ -212,7 +212,7 @@
         {
           "id": 1785062515169,
           "title": "Geschirr/Besteck",
-          "vorhanden": true,
+          "vorhanden": false,
           "verantwortlich": "Stephan",
           "woBesorgen": "",
           "notizen": "",
