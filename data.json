@@ -19,7 +19,7 @@
         {
           "id": 1785058633574,
           "title": "Solar/Akku",
-          "vorhanden": false,
+          "vorhanden": true,
           "verantwortlich": "Stephan",
           "woBesorgen": "",
           "notizen": "",
