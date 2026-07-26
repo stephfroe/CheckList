@@ -37,6 +37,17 @@
           "schemaValues": {},
           "localFields": [],
           "isEditing": false
+        },
+        {
+          "id": 1785058719085,
+          "title": "Gasgrill",
+          "vorhanden": false,
+          "verantwortlich": "Kolja",
+          "woBesorgen": "",
+          "notizen": "",
+          "schemaValues": {},
+          "localFields": [],
+          "isEditing": false
         }
       ]
     }
