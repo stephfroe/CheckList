@@ -198,6 +198,17 @@
           "schemaValues": {},
           "localFields": [],
           "isEditing": false
+        },
+        {
+          "id": 1785062515169,
+          "title": "Geschirr/Besteck",
+          "vorhanden": false,
+          "verantwortlich": "",
+          "woBesorgen": "",
+          "notizen": "",
+          "schemaValues": {},
+          "localFields": [],
+          "isEditing": false
         }
       ]
     }
