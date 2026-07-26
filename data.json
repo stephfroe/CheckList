@@ -169,7 +169,7 @@
         {
           "id": 1785062411989,
           "title": "Wasserkanister",
-          "vorhanden": false,
+          "vorhanden": true,
           "verantwortlich": "",
           "woBesorgen": "",
           "notizen": "",
