@@ -12,7 +12,6 @@
       --text-muted: #64748b;
       --border: #cbd5e1;
       --primary: #2563eb;
-      --primary-hover: #1d4ed8;
       --danger: #ef4444;
       --success: #10b981;
       --badge-bg: #f1f5f9;
@@ -28,7 +27,6 @@
         --text-muted: #94a3b8;
         --border: #334155;
         --primary: #3b82f6;
-        --primary-hover: #60a5fa;
         --danger: #f87171;
         --success: #34d399;
         --badge-bg: #0f172a;
@@ -44,7 +42,6 @@
       --text-muted: #94a3b8;
       --border: #334155;
       --primary: #3b82f6;
-      --primary-hover: #60a5fa;
       --danger: #f87171;
       --success: #34d399;
       --badge-bg: #0f172a;
@@ -59,7 +56,6 @@
       --text-muted: #64748b;
       --border: #cbd5e1;
       --primary: #2563eb;
-      --primary-hover: #1d4ed8;
       --danger: #ef4444;
       --success: #10b981;
       --badge-bg: #f1f5f9;
@@ -76,26 +72,26 @@
       max-width: 900px;
       margin: 0 auto;
       padding: 8px;
-      line-height: 1.3;
+      line-height: 1.2;
     }
 
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
-    h1 { font-size: 1.2rem; margin: 0; }
+    h1 { font-size: 1.1rem; margin: 0; }
 
     .theme-toggle {
       background: var(--card);
       border: 1px solid var(--border);
       color: var(--text);
-      padding: 4px 8px;
-      border-radius: 16px;
+      padding: 3px 6px;
+      border-radius: 12px;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       display: flex;
       align-items: center;
       gap: 4px;
@@ -105,41 +101,41 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 10px;
-      margin-bottom: 12px;
+      padding: 8px;
+      margin-bottom: 10px;
       box-shadow: var(--shadow);
     }
 
     label {
       display: block;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 600;
-      margin-top: 6px;
+      margin-top: 4px;
       margin-bottom: 2px;
       color: var(--text-muted);
     }
 
     input[type="text"], input[type="password"], textarea, select {
       width: 100%;
-      padding: 6px 8px;
+      padding: 4px 6px;
       background-color: var(--input-bg);
       color: var(--text);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 4px;
       font-size: 0.85rem;
     }
 
-    textarea { min-height: 45px; resize: vertical; }
+    textarea { min-height: 40px; resize: vertical; }
 
     .btn {
       background-color: var(--primary);
       color: white;
       border: none;
-      padding: 6px 12px;
-      border-radius: 6px;
+      padding: 4px 8px;
+      border-radius: 4px;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -150,7 +146,7 @@
     .btn:active { opacity: 0.8; }
     .btn-danger { background-color: var(--danger); }
     .btn-secondary { background-color: var(--badge-bg); color: var(--text); border: 1px solid var(--border); }
-    .btn-sm { padding: 3px 6px; font-size: 0.75rem; border-radius: 4px; }
+    .btn-sm { padding: 2px 5px; font-size: 0.7rem; border-radius: 3px; }
 
     .hidden { display: none !important; }
 
@@ -158,9 +154,9 @@
     .filter-card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 8px;
-      margin-bottom: 12px;
+      border-radius: 6px;
+      padding: 6px;
+      margin-bottom: 8px;
     }
 
     .filter-grid {
@@ -174,72 +170,40 @@
       .filter-grid { grid-template-columns: 1fr; }
     }
 
-    /* KOMPAKTE ITEM CARD STYLES */
-    .items-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 6px;
-    }
-
-    @media (min-width: 650px) {
-      .items-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    .item-card {
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 6px 8px;
-      background: var(--card);
+    /* ULTRA KOMPAKTE EINZEILER ITEM STYLES */
+    .items-list {
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      gap: 3px;
     }
 
-    .item-card.is-available { border-left: 4px solid var(--success); }
-    .item-card.is-missing { border-left: 4px solid var(--danger); }
-
-    .item-header {
+    .item-row {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 8px;
+      background: var(--card);
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 6px;
+      min-height: 32px;
     }
 
-    .item-title { font-size: 0.9rem; font-weight: 600; word-break: break-word; }
+    .item-row.is-available {
+      border-left: 3px solid var(--success);
+    }
 
-    .meta-badges {
+    .item-row.is-missing {
+      border-left: 3px solid var(--danger);
+    }
+
+    .item-content {
       display: flex;
+      align-items: center;
+      gap: 8px;
       flex-wrap: wrap;
-      gap: 4px;
-      margin-top: 3px;
-    }
-
-    .badge {
-      background: var(--badge-bg);
-      color: var(--text);
-      padding: 1px 5px;
-      border-radius: 4px;
-      font-size: 0.7rem;
-      font-weight: 500;
-      border: 1px solid var(--border);
-    }
-
-    .bracket-status {
-      font-weight: 700;
-      font-size: 0.75rem;
-      padding: 1px 4px;
-      border-radius: 3px;
-    }
-
-    .bracket-success { color: var(--success); border: 1px solid var(--success); background: rgba(16, 185, 129, 0.08); }
-    .bracket-danger { color: var(--danger); border: 1px solid var(--danger); background: rgba(239, 68, 68, 0.08); }
-
-    .item-details {
-      margin-top: 4px;
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      border-top: 1px dashed var(--border);
-      padding-top: 4px;
+      flex-grow: 1;
+      overflow: hidden;
     }
 
     .checkbox-label {
@@ -248,18 +212,61 @@
       gap: 6px;
       cursor: pointer;
       user-select: none;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
+      font-weight: 500;
     }
 
     .checkbox-label input[type="checkbox"] {
       width: 16px;
       height: 16px;
+      margin: 0;
       accent-color: var(--primary);
+      cursor: pointer;
     }
 
-    .edit-form { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); }
+    .item-title-text.completed {
+      text-decoration: line-through;
+      color: var(--text-muted);
+      opacity: 0.8;
+    }
+
+    .meta-badges {
+      display: inline-flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .badge {
+      background: var(--badge-bg);
+      color: var(--text);
+      padding: 0px 4px;
+      border-radius: 3px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      border: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .item-notes-inline {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+    }
+
+    .edit-form {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 8px;
+      background: var(--card);
+      margin-bottom: 4px;
+    }
+
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .status-bar { font-size: 0.75rem; color: var(--text-muted); }
+    .status-bar { font-size: 0.7rem; color: var(--text-muted); }
     .flex-row { display: flex; gap: 6px; align-items: center; }
 
     /* DRUCK / PDF STYLES */
@@ -267,7 +274,7 @@
       body { background: white; color: black; max-width: 100%; padding: 0; }
       header, #config-card, .filter-card, .btn, .theme-toggle, .status-bar, hr, .flex-row input, .checkbox-label input { display: none !important; }
       .card { border: 1px solid #ccc; box-shadow: none; margin-bottom: 10px; page-break-inside: avoid; }
-      .item-card { border: 1px solid #eee; page-break-inside: avoid; }
+      .item-row { border: 1px solid #eee; page-break-inside: avoid; }
     }
   </style>
 </head>
@@ -282,7 +289,7 @@
 
   <!-- CONFIG SECTION -->
   <div id="config-card" class="card">
-    <h2 style="margin-top:0; font-size: 1rem;">GitHub Konfiguration</h2>
+    <h2 style="margin-top:0; font-size: 0.95rem;">GitHub Konfiguration</h2>
     <label>GitHub Personal Access Token (PAT)</label>
     <input type="password" id="cfg-token" placeholder="ghp_xxxxxxxxxxxx">
 
@@ -297,12 +304,12 @@
       </div>
     </div>
 
-    <button class="btn" style="width: 100%; margin-top: 10px;" onclick="saveConfig()">Verbinden & Laden</button>
+    <button class="btn" style="width: 100%; margin-top: 8px;" onclick="saveConfig()">Verbinden & Laden</button>
   </div>
 
   <!-- APP SECTION -->
   <div id="app-card" class="card hidden">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 4px;">
       <span id="sync-status" class="status-bar">Bereit</span>
       <div class="flex-row">
         <button class="btn btn-secondary btn-sm" onclick="loadDataFromGitHub()">🔄 Aktualisieren</button>
@@ -310,18 +317,18 @@
       </div>
     </div>
     
-    <hr style="border: 0; border-top: 1px solid var(--border); margin: 8px 0;">
+    <hr style="border: 0; border-top: 1px solid var(--border); margin: 6px 0;">
 
     <!-- REPORTING & FILTER BEREICH -->
     <div class="filter-card">
-      <div style="font-weight: 600; font-size: 0.8rem; margin-bottom: 4px;">🔍 Report / Filter</div>
+      <div style="font-weight: 600; font-size: 0.75rem; margin-bottom: 2px;">🔍 Report / Filter</div>
       <div class="filter-grid">
         <div>
           <label style="margin-top:0;">Status</label>
           <select id="filter-status" onchange="render()">
             <option value="all">Alle Einträge</option>
-            <option value="missing">Nur FEHLENDE [ ✕ ]</option>
-            <option value="available">Nur VORHANDENE [ ✓ ]</option>
+            <option value="missing">Nur FEHLENDE</option>
+            <option value="available">Nur VORHANDENE</option>
           </select>
         </div>
         <div>
@@ -331,14 +338,14 @@
           </select>
         </div>
         <div>
-          <button class="btn btn-secondary" style="width: 100%; font-size: 0.8rem;" onclick="window.print()">🖨️ Drucken / PDF</button>
+          <button class="btn btn-secondary" style="width: 100%; font-size: 0.75rem;" onclick="window.print()">🖨️ Drucken / PDF</button>
         </div>
       </div>
     </div>
 
     <!-- Neue Liste anlegen -->
-    <div class="flex-row" style="margin-bottom: 10px;">
-      <input type="text" id="new-list-name" placeholder="Neue Liste erstellet (z. B. Party-Einkauf)..." onkeydown="if(event.key==='Enter') addChecklist()">
+    <div class="flex-row" style="margin-bottom: 8px;">
+      <input type="text" id="new-list-name" placeholder="Neue Liste (z. B. SummerBreeze)..." onkeydown="if(event.key==='Enter') addChecklist()">
       <button class="btn btn-sm" onclick="addChecklist()">+ Liste</button>
     </div>
 
@@ -496,7 +503,6 @@
       }
     }
 
-    // BEFÜLLT DAS PERSONEN-DROPDOWN AUTOMATISCH
     function updatePersonFilterDropdown() {
       const personSelect = document.getElementById('filter-person');
       const currentSelected = personSelect.value;
@@ -658,13 +664,10 @@
       }
 
       appData.lists.forEach(list => {
-        // FILTER LOGIK FÜR EINTRÄGE
         const filteredItems = list.items.filter(item => {
-          // Status Filter
           if (filterStatus === 'missing' && item.vorhanden) return false;
           if (filterStatus === 'available' && !item.vorhanden) return false;
 
-          // Person Filter
           if (filterPerson !== 'all' && (item.verantwortlich || '').trim().toLowerCase() !== filterPerson.toLowerCase()) {
             return false;
           }
@@ -672,7 +675,6 @@
           return true;
         });
 
-        // Wenn gefiltert wird und in dieser Liste keine passenden Einträge sind -> Liste nicht anzeigen
         if ((filterStatus !== 'all' || filterPerson !== 'all') && filteredItems.length === 0) {
           return;
         }
@@ -683,15 +685,11 @@
         let itemsHtml = '';
 
         if (filteredItems.length === 0) {
-          itemsHtml = '<p style="font-size:0.8rem; color:var(--text-muted); text-align:center; margin: 8px 0;">Keine Einträge vorhanden.</p>';
+          itemsHtml = '<p style="font-size:0.75rem; color:var(--text-muted); text-align:center; margin: 4px 0;">Keine Einträge vorhanden.</p>';
         } else {
-          let itemsCards = '';
+          let rowsHtml = '';
           filteredItems.forEach(item => {
             const isAvailClass = item.vorhanden ? 'is-available' : 'is-missing';
-            
-            let statusBracket = item.vorhanden 
-              ? `<span class="bracket-status bracket-success">[ ✓ Vorhanden ]</span>`
-              : `<span class="bracket-status bracket-danger">[ ✕ Fehlt ]</span>`;
 
             let badges = '';
             if (item.verantwortlich) badges += `<span class="badge">👤 ${escapeHtml(item.verantwortlich)}</span>`;
@@ -750,77 +748,69 @@
                 });
               }
 
-              itemsCards += `
-                <div class="item-card" style="grid-column: 1 / -1;">
+              rowsHtml += `
+                <div class="edit-form">
                   <strong>Eintrag bearbeiten</strong>
-                  <div class="edit-form">
-                    <label>Titel / Name</label>
-                    <input type="text" id="edit-title-${item.id}" value="${escapeHtml(item.title)}">
+                  <label>Titel / Name</label>
+                  <input type="text" id="edit-title-${item.id}" value="${escapeHtml(item.title)}">
 
-                    <div class="grid-2">
-                      <div>
-                        <label>Verantwortlich</label>
-                        <input type="text" id="edit-resp-${item.id}" value="${escapeHtml(item.verantwortlich || '')}">
-                      </div>
-                      <div>
-                        <label>Wo zu besorgen</label>
-                        <input type="text" id="edit-where-${item.id}" value="${escapeHtml(item.woBesorgen || '')}">
-                      </div>
+                  <div class="grid-2">
+                    <div>
+                      <label>Verantwortlich</label>
+                      <input type="text" id="edit-resp-${item.id}" value="${escapeHtml(item.verantwortlich || '')}">
                     </div>
+                    <div>
+                      <label>Wo zu besorgen</label>
+                      <input type="text" id="edit-where-${item.id}" value="${escapeHtml(item.woBesorgen || '')}">
+                    </div>
+                  </div>
 
-                    ${schemaFieldsInputs}
-                    ${localFieldsInputs}
+                  ${schemaFieldsInputs}
+                  ${localFieldsInputs}
 
-                    <label>Notizen</label>
-                    <textarea id="edit-notes-${item.id}">${escapeHtml(item.notizen || '')}</textarea>
+                  <label>Notizen</label>
+                  <textarea id="edit-notes-${item.id}">${escapeHtml(item.notizen || '')}</textarea>
 
-                    <div style="margin-top: 8px; display: flex; gap: 6px; justify-content: space-between; align-items: center;">
-                      <button class="btn btn-secondary btn-sm" onclick="promptAddCustomField(${list.id}, ${item.id})">+ Feld</button>
-                      <div class="flex-row">
-                        <button class="btn btn-danger btn-sm" onclick="deleteItem(${list.id}, ${item.id})">Löschen</button>
-                        <button class="btn btn-sm" onclick="saveItem(${list.id}, ${item.id})">Speichern</button>
-                      </div>
+                  <div style="margin-top: 6px; display: flex; gap: 4px; justify-content: space-between; align-items: center;">
+                    <button class="btn btn-secondary btn-sm" onclick="promptAddCustomField(${list.id}, ${item.id})">+ Feld</button>
+                    <div class="flex-row">
+                      <button class="btn btn-danger btn-sm" onclick="deleteItem(${list.id}, ${item.id})">Löschen</button>
+                      <button class="btn btn-sm" onclick="saveItem(${list.id}, ${item.id})">Speichern</button>
                     </div>
                   </div>
                 </div>
               `;
             } else {
-              itemsCards += `
-                <div class="item-card ${isAvailClass}">
-                  <div>
-                    <div class="item-header">
-                      <div class="item-title">${escapeHtml(item.title)}</div>
-                      <button class="btn btn-secondary btn-sm" onclick="toggleEdit(${list.id}, ${item.id})">✏️</button>
-                    </div>
-                    <div class="meta-badges">
-                      ${statusBracket}
-                      ${badges}
-                    </div>
-                    ${item.notizen ? `<div class="item-details">📝 ${escapeHtml(item.notizen)}</div>` : ''}
-                  </div>
-
-                  <div style="margin-top: 6px; display: flex; justify-content: space-between; align-items: center;">
+              // SCHLANKE EINZEILEN-ANSICHT
+              rowsHtml += `
+                <div class="item-row ${isAvailClass}">
+                  <div class="item-content">
                     <label class="checkbox-label">
                       <input type="checkbox" ${item.vorhanden ? 'checked' : ''} onchange="toggleVorhanden(${list.id}, ${item.id})">
-                      Vorhanden
+                      <span class="item-title-text ${item.vorhanden ? 'completed' : ''}">${escapeHtml(item.title)}</span>
                     </label>
+
+                    ${badges ? `<div class="meta-badges">${badges}</div>` : ''}
+                    ${item.notizen ? `<span class="item-notes-inline" title="${escapeHtml(item.notizen)}">📝 ${escapeHtml(item.notizen)}</span>` : ''}
                   </div>
+
+                  <button class="btn btn-secondary btn-sm" onclick="toggleEdit(${list.id}, ${item.id})" style="padding: 1px 4px; font-size: 0.65rem;">✏️</button>
                 </div>
               `;
             }
           });
 
-          itemsHtml = `<div class="items-grid">${itemsCards}</div>`;
+          itemsHtml = `<div class="items-list">${rowsHtml}</div>`;
         }
 
         listEl.innerHTML = `
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; gap: 6px;">
-            <h2 style="margin: 0; font-size: 1.05rem;">${escapeHtml(list.title)}</h2>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; gap: 4px;">
+            <h2 style="margin: 0; font-size: 0.95rem;">${escapeHtml(list.title)}</h2>
             <button class="btn btn-danger btn-sm" onclick="deleteList(${list.id})">Löschen</button>
           </div>
           <div>${itemsHtml}</div>
           
-          <div class="flex-row" style="margin-top: 8px;">
+          <div class="flex-row" style="margin-top: 6px;">
             <input type="text" id="input-add-item-${list.id}" placeholder="Eintrag hinzufügen..." onkeydown="if(event.key==='Enter') addItemDirect(${list.id})">
             <button class="btn btn-sm" onclick="addItemDirect(${list.id})">+</button>
           </div>
