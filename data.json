@@ -81,6 +81,17 @@
           "schemaValues": {},
           "localFields": [],
           "isEditing": false
+        },
+        {
+          "id": 1785060620017,
+          "title": "Kaffeepulver",
+          "vorhanden": false,
+          "verantwortlich": "",
+          "woBesorgen": "",
+          "notizen": "",
+          "schemaValues": {},
+          "localFields": [],
+          "isEditing": false
         }
       ]
     }
