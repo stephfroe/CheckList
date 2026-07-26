@@ -8,6 +8,17 @@
         {
           "id": 1785058550646,
           "title": "Kühlbox",
+          "vorhanden": true,
+          "verantwortlich": "Stephan",
+          "woBesorgen": "",
+          "notizen": "",
+          "schemaValues": {},
+          "localFields": [],
+          "isEditing": false
+        },
+        {
+          "id": 1785058633574,
+          "title": "Solar/Akku",
           "vorhanden": false,
           "verantwortlich": "Stephan",
           "woBesorgen": "",
