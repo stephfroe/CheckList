@@ -156,7 +156,14 @@
           "woBesorgen": "",
           "notizen": "",
           "schemaValues": {},
-          "localFields": [],
+          "localFields": [
+            {
+              "id": "f_1785062375360",
+              "label": "Anzahl",
+              "type": "text",
+              "value": "1"
+            }
+          ],
           "isEditing": false
         }
       ]
