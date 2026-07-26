@@ -26,6 +26,17 @@
           "schemaValues": {},
           "localFields": [],
           "isEditing": false
+        },
+        {
+          "id": 1785058684237,
+          "title": "Pavillon",
+          "vorhanden": false,
+          "verantwortlich": "Stephan",
+          "woBesorgen": "",
+          "notizen": "",
+          "schemaValues": {},
+          "localFields": [],
+          "isEditing": false
         }
       ]
     }
