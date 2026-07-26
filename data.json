@@ -107,7 +107,7 @@
         {
           "id": 1785061350116,
           "title": "Pfanne/Topf",
-          "vorhanden": false,
+          "vorhanden": true,
           "verantwortlich": "Stephan",
           "woBesorgen": "",
           "notizen": "Brauchen wir einen Topf?",
