@@ -263,8 +263,10 @@
           "vorhanden": false,
           "verantwortlich": "",
           "woBesorgen": "",
-          "notizen": "",
-          "schemaValues": {},
+          "notizen": "Kopfschmerztabletten\nFenistil\n?",
+          "schemaValues": {
+            "f_1785062581798": ""
+          },
           "localFields": [],
           "isEditing": false
         }
