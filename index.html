@@ -224,10 +224,13 @@
       cursor: pointer;
     }
 
+    /* Klar lesbarer Text ohne Durchstreichen */
+    .item-title-text {
+      color: var(--text);
+    }
+
     .item-title-text.completed {
-      text-decoration: line-through;
-      color: var(--text-muted);
-      opacity: 0.8;
+      opacity: 0.75; /* Nur ganz leichte Aufhellung, voll lesbar */
     }
 
     .meta-badges {
@@ -781,7 +784,7 @@
                 </div>
               `;
             } else {
-              // SCHLANKE EINZEILEN-ANSICHT
+              // KLAR LESBARE EINZEILEN-ANSICHT
               rowsHtml += `
                 <div class="item-row ${isAvailClass}">
                   <div class="item-content">
