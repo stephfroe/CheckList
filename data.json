@@ -165,6 +165,17 @@
             }
           ],
           "isEditing": false
+        },
+        {
+          "id": 1785062411989,
+          "title": "Wasserkanister",
+          "vorhanden": false,
+          "verantwortlich": "",
+          "woBesorgen": "",
+          "notizen": "",
+          "schemaValues": {},
+          "localFields": [],
+          "isEditing": false
         }
       ]
     }
