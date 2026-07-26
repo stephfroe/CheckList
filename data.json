@@ -48,6 +48,17 @@
           "schemaValues": {},
           "localFields": [],
           "isEditing": false
+        },
+        {
+          "id": 1785059528512,
+          "title": "Zelt für eine Person",
+          "vorhanden": false,
+          "verantwortlich": "",
+          "woBesorgen": "",
+          "notizen": "",
+          "schemaValues": {},
+          "localFields": [],
+          "isEditing": false
         }
       ]
     }
