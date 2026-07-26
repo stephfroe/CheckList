@@ -243,6 +243,17 @@
           },
           "localFields": [],
           "isEditing": false
+        },
+        {
+          "id": 1785062680278,
+          "title": "Kopfbedeckung",
+          "vorhanden": false,
+          "verantwortlich": "",
+          "woBesorgen": "",
+          "notizen": "",
+          "schemaValues": {},
+          "localFields": [],
+          "isEditing": false
         }
       ]
     }
