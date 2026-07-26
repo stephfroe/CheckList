@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="system">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Shared Checklists</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #cbd5e1;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+      --success: #10b981;
+      --badge-bg: #e2e8f0;
+      --input-bg: #ffffff;
+      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      [data-theme="system"] {
+        --bg: #0f172a;
+        --card: #1e293b;
+        --text: #f8fafc;
+        --text-muted: #94a3b8;
+        --border: #334155;
+        --primary: #3b82f6;
+        --primary-hover: #60a5fa;
+        --danger: #f87171;
+        --danger-hover: #ef4444;
+        --success: #34d399;
+        --badge-bg: #334155;
+        --input-bg: #0f172a;
+        --shadow: 0 4px 12px rgba(0,0,0,0.3);
+      }
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+      --primary: #3b82f6;
+      --primary-hover: #60a5fa;
+      --danger: #f87171;
+      --danger-hover: #ef4444;
+      --success: #34d399;
+      --badge-bg: #334155;
+      --input-bg: #0f172a;
+      --shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #cbd5e1;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --danger: #ef4444;
+      --danger-hover: #dc2626;
+      --success: #10b981;
+      --badge-bg: #e2e8f0;
+      --input-bg: #ffffff;
+      --shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 12px;
+      line-height: 1.5;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 4px 0;
+    }
+
+    h1 { font-size: 1.4rem; margin: 0; }
+
+    .theme-toggle {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 10px;
+      margin-bottom: 4px;
+      color: var(--text-muted);
+    }
+
+    input[type="text"], input[type="password"], textarea, select {
+      width: 100%;
+      padding: 10px 12px;
+      background-color: var(--input-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+
+    textarea { min-height: 70px; resize: vertical; }
+
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      touch-action: manipulation;
+    }
+
+    .btn:active { opacity: 0.8; }
+    .btn-danger { background-color: var(--danger); }
+    .btn-secondary { background-color: var(--badge-bg); color: var(--text); }
+    .btn-sm { padding: 6px 10px; font-size: 0.8rem; border-radius: 6px; }
+
+    .hidden { display: none !important; }
+
+    /* ITEM CARD STYLES */
+    .item-card {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+      background: var(--card);
+      transition: border-color 0.2s;
+    }
+
+    .item-card.is-available {
+      border-left: 5px solid var(--success);
+    }
+
+    .item-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .item-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .meta-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .badge {
+      background: var(--badge-bg);
+      color: var(--text);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .badge-success { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+    .badge-danger { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+
+    .item-details {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border-top: 1px dashed var(--border);
+      padding-top: 8px;
+    }
+
+    .checkbox-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.9rem;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--primary);
+    }
+
+    /* EDIT FORM INSIDE ITEM */
+    .edit-form {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 600px) {
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+
+    .status-bar {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .flex-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📋 Checklisten</h1>
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <span id="theme-icon">🌓</span> <span id="theme-label">Design</span>
+    </button>
+  </header>
+
+  <!-- CONFIG SECTION -->
+  <div id="config-card" class="card">
+    <h2 style="margin-top:0;">GitHub Konfiguration</h2>
+    <p style="font-size: 0.85rem; color: var(--text-muted);">
+      Gib hier deinen GitHub Personal Access Token (PAT) sowie dein Repository an.
+    </p>
+    <label>GitHub Personal Access Token (PAT)</label>
+    <input type="password" id="cfg-token" placeholder="ghp_xxxxxxxxxxxx">
+
+    <div class="grid-2">
+      <div>
+        <label>GitHub Owner (User/Orga)</label>
+        <input type="text" id="cfg-owner" placeholder="z. B. octocat">
+      </div>
+      <div>
+        <label>Repository Name</label>
+        <input type="text" id="cfg-repo" placeholder="z. B. mein-checklisten-repo">
+      </div>
+    </div>
+
+    <button class="btn" style="width: 100%; margin-top: 16px;" onclick="saveConfig()">Verbinden & Laden</button>
+  </div>
+
+  <!-- APP SECTION -->
+  <div id="app-card" class="card hidden">
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+      <span id="sync-status" class="status-bar">Bereit</span>
+      <div class="flex-row">
+        <button class="btn btn-secondary btn-sm" onclick="loadDataFromGitHub()">🔄 Aktualisieren</button>
+        <button class="btn btn-secondary btn-sm" onclick="resetConfig()">⚙️ Access</button>
+      </div>
+    </div>
+    
+    <hr style="border: 0; border-top: 1px solid var(--border); margin: 16px 0;">
+
+    <!-- Neue Liste anlegen -->
+    <div class="flex-row" style="margin-bottom: 20px;">
+      <input type="text" id="new-list-name" placeholder="Neue Liste erstellen (z. B. Party-Einkauf)...">
+      <button class="btn" onclick="addChecklist()">+ Liste</button>
+    </div>
+
+    <!-- Container für Listen -->
+    <div id="checklists-container"></div>
+  </div>
+
+  <script>
+    let config = { token: '', owner: '', repo: '', path: 'data.json' };
+    let appData = { lists: [] };
+    let fileSha = null;
+
+    // --- THEME MANAGEMENT ---
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme') || 'system';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeLabel(savedTheme);
+    }
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      let next = 'light';
+      if (current === 'light') next = 'dark';
+      else if (current === 'dark') next = 'system';
+      
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      updateThemeLabel(next);
+    }
+
+    function updateThemeLabel(theme) {
+      const label = document.getElementById('theme-label');
+      const icon = document.getElementById('theme-icon');
+      if (theme === 'light') { icon.innerText = '☀️'; label.innerText = 'Hell'; }
+      else if (theme === 'dark') { icon.innerText = '🌙'; label.innerText = 'Dunkel'; }
+      else { icon.innerText = '🌓'; label.innerText = 'Auto'; }
+    }
+
+    // --- INITIALISIERUNG ---
+    window.onload = () => {
+      initTheme();
+      const savedConfig = localStorage.getItem('gh_checklist_config');
+      if (savedConfig) {
+        config = JSON.parse(savedConfig);
+        document.getElementById('cfg-token').value = config.token;
+        document.getElementById('cfg-owner').value = config.owner;
+        document.getElementById('cfg-repo').value = config.repo;
+        showApp();
+        loadDataFromGitHub();
+      }
+    };
+
+    function saveConfig() {
+      config.token = document.getElementById('cfg-token').value.trim();
+      config.owner = document.getElementById('cfg-owner').value.trim();
+      config.repo = document.getElementById('cfg-repo').value.trim();
+
+      if (!config.token || !config.owner || !config.repo) {
+        alert('Bitte alle Felder ausfüllen!');
+        return;
+      }
+
+      localStorage.setItem('gh_checklist_config', JSON.stringify(config));
+      showApp();
+      loadDataFromGitHub();
+    }
+
+    function resetConfig() {
+      document.getElementById('config-card').classList.remove('hidden');
+      document.getElementById('app-card').classList.add('hidden');
+    }
+
+    function showApp() {
+      document.getElementById('config-card').classList.add('hidden');
+      document.getElementById('app-card').classList.remove('hidden');
+    }
+
+    function setStatus(text) {
+      document.getElementById('sync-status').innerText = text;
+    }
+
+    // --- GITHUB API ---
+    async function loadDataFromGitHub() {
+      setStatus('Lade Daten...');
+      const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}`;
+
+      try {
+        const response = await fetch(url, {
+          headers: {
+            'Authorization': `Bearer ${config.token}`,
+            'Accept': 'application/vnd.github.v3+json'
+          }
+        });
+
+        if (response.status === 404) {
+          appData = { lists: [] };
+          fileSha = null;
+          setStatus('Keine data.json vorhanden. Neue wird beim Speichern angelegt.');
+          render();
+          return;
+        }
+
+        if (!response.ok) throw new Error(`Fehler: ${response.statusText}`);
+
+        const data = await response.json();
+        fileSha = data.sha;
+        
+        const content = decodeURIComponent(atob(data.content).split('').map(c => {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+
+        appData = JSON.parse(content);
+        setStatus('Aktualisiert.');
+        render();
+      } catch (err) {
+        console.error(err);
+        setStatus(`Fehler beim Laden: ${err.message}`);
+      }
+    }
+
+    async function saveDataToGitHub() {
+      setStatus('Speichere...');
+      const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${config.path}`;
+
+      const jsonString = JSON.stringify(appData, null, 2);
+      const contentEncoded = btoa(encodeURIComponent(jsonString).replace(/%([0-9A-F]{2})/g, (match, p1) => {
+        return String.fromCharCode('0x' + p1);
+      }));
+
+      const body = {
+        message: 'Update checklists via WebApp',
+        content: contentEncoded
+      };
+
+      if (fileSha) body.sha = fileSha;
+
+      try {
+        const response = await fetch(url, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${config.token}`,
+            'Content-Type': 'application/json',
+            'Accept': 'application/vnd.github.v3+json'
+          },
+          body: JSON.stringify(body)
+        });
+
+        if (!response.ok) throw new Error(`Fehler: ${response.statusText}`);
+
+        const resData = await response.json();
+        fileSha = resData.content.sha;
+        setStatus('Gespeichert!');
+      } catch (err) {
+        console.error(err);
+        setStatus(`Fehler beim Speichern: ${err.message}`);
+      }
+    }
+
+    // --- APP LOGIK ---
+    function addChecklist() {
+      const input = document.getElementById('new-list-name');
+      const title = input.value.trim();
+      if (!title) return;
+
+      appData.lists.push({
+        id: Date.now(),
+        title: title,
+        schema: [], // Globale Zusatzfelder für diese Liste
+        items: []
+      });
+
+      input.value = '';
+      render();
+      saveDataToGitHub();
+    }
+
+    function deleteList(listId) {
+      if (!confirm('Gesamte Liste löschen?')) return;
+      appData.lists = appData.lists.filter(l => l.id !== listId);
+      render();
+      saveDataToGitHub();
+    }
+
+    function addItem(listId) {
+      const list = appData.lists.find(l => l.id === listId);
+      const newItem = {
+        id: Date.now(),
+        title: 'Neuer Eintrag',
+        vorhanden: false,
+        verantwortlich: '',
+        woBesorgen: '',
+        notizen: '',
+        schemaValues: {}, // Werte für Listen-Schema-Felder
+        localFields: [],  // Lokale Custom Fields
+        isEditing: true   // Direkt im Bearbeitungsmodus öffnen
+      };
+
+      list.items.push(newItem);
+      render();
+    }
+
+    function toggleVorhanden(listId, itemId) {
+      const list = appData.lists.find(l => l.id === listId);
+      const item = list.items.find(i => i.id === itemId);
+      item.vorhanden = !item.vorhanden;
+      render();
+      saveDataToGitHub();
+    }
+
+    function toggleEdit(listId, itemId) {
+      const list = appData.lists.find(l => l.id === listId);
+      const item = list.items.find(i => i.id === itemId);
+      item.isEditing = !item.isEditing;
+      render();
+    }
+
+    function saveItem(listId, itemId) {
+      const list = appData.lists.find(l => l.id === listId);
+      const item = list.items.find(i => i.id === itemId);
+
+      item.title = document.getElementById(`edit-title-${itemId}`).value.trim() || 'Unbenannt';
+      item.verantwortlich = document.getElementById(`edit-resp-${itemId}`).value.trim();
+      item.woBesorgen = document.getElementById(`edit-where-${itemId}`).value.trim();
+      item.notizen = document.getElementById(`edit-notes-${itemId}`).value.trim();
+
+      // Schema-Werte speichern
+      if (list.schema) {
+        list.schema.forEach(field => {
+          const el = document.getElementById(`edit-schema-${itemId}-${field.id}`);
+          if (el) {
+            item.schemaValues[field.id] = field.type === 'boolean' ? el.checked : el.value;
+          }
+        });
+      }
+
+      // Lokale Felder speichern
+      if (item.localFields) {
+        item.localFields.forEach(field => {
+          const el = document.getElementById(`edit-local-${itemId}-${field.id}`);
+          if (el) {
+            field.value = field.type === 'boolean' ? el.checked : el.value;
+          }
+        });
+      }
+
+      item.isEditing = false;
+      render();
+      saveDataToGitHub();
+    }
+
+    function deleteItem(listId, itemId) {
+      const list = appData.lists.find(l => l.id === listId);
+      list.items = list.items.filter(i => i.id !== itemId);
+      render();
+      saveDataToGitHub();
+    }
+
+    // DYNAMISCHES FELD HINZUFÜGEN
+    function promptAddCustomField(listId, itemId) {
+      const fieldName = prompt('Name des neuen Feldes (z. B. "Menge" oder "Dringend"):');
+      if (!fieldName) return;
+
+      const fieldType = confirm('Soll es ein Ja/Nein-Schalter sein? (Abbrechen drücken für einfaches Textfeld)') ? 'boolean' : 'text';
+      const applyToAll = confirm(`Soll das Feld "${fieldName}" für ALLE Einträge in dieser Liste gelten?\n\n[OK] = Für alle Einträge dieser Liste\n[Abbrechen] = Nur für diesen konkreten Eintrag`);
+
+      const fieldId = 'f_' + Date.now();
+
+      if (applyToAll) {
+        const list = appData.lists.find(l => l.id === listId);
+        if (!list.schema) list.schema = [];
+        list.schema.push({ id: fieldId, label: fieldName, type: fieldType });
+      } else {
+        const list = appData.lists.find(l => l.id === listId);
+        const item = list.items.find(i => i.id === itemId);
+        if (!item.localFields) item.localFields = [];
+        item.localFields.push({ id: fieldId, label: fieldName, type: fieldType, value: fieldType === 'boolean' ? false : '' });
+      }
+
+      render();
+    }
+
+    // --- RENDER FUNCTION ---
+    function render() {
+      const container = document.getElementById('checklists-container');
+      container.innerHTML = '';
+
+      if (appData.lists.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-muted); text-align: center; padding: 20px 0;">Noch keine Checklisten vorhanden.</p>';
+        return;
+      }
+
+      appData.lists.forEach(list => {
+        const listEl = document.createElement('div');
+        listEl.className = 'card';
+        listEl.style.boxShadow = 'none';
+
+        let itemsHtml = '';
+
+        if (list.items.length === 0) {
+          itemsHtml = '<p style="font-size:0.85rem; color:var(--text-muted); text-align:center; margin: 15px 0;">Keine Einträge in dieser Liste.</p>';
+        } else {
+          list.items.forEach(item => {
+            const isAvailClass = item.vorhanden ? 'is-available' : '';
+            
+            // Render Badges / Meta
+            let badges = '';
+            if (item.vorhanden) badges += `<span class="badge badge-success">✓ Vorhanden</span>`;
+            else badges += `<span class="badge badge-danger">✕ Fehlt</span>`;
+            if (item.verantwortlich) badges += `<span class="badge">👤 ${escapeHtml(item.verantwortlich)}</span>`;
+            if (item.woBesorgen) badges += `<span class="badge">📍 ${escapeHtml(item.woBesorgen)}</span>`;
+
+            // Schema Felder
+            if (list.schema) {
+              list.schema.forEach(f => {
+                const val = item.schemaValues ? item.schemaValues[f.id] : null;
+                if (f.type === 'boolean' && val) badges += `<span class="badge">🔹 ${escapeHtml(f.label)}: Ja</span>`;
+                else if (f.type === 'text' && val) badges += `<span class="badge">🔹 ${escapeHtml(f.label)}: ${escapeHtml(val)}</span>`;
+              });
+            }
+
+            // Lokale Felder
+            if (item.localFields) {
+              item.localFields.forEach(f => {
+                if (f.type === 'boolean' && f.value) badges += `<span class="badge">🔸 ${escapeHtml(f.label)}: Ja</span>`;
+                else if (f.type === 'text' && f.value) badges += `<span class="badge">🔸 ${escapeHtml(f.label)}: ${escapeHtml(f.value)}</span>`;
+              });
+            }
+
+            if (item.isEditing) {
+              // EDIT MODUS FORMULAR
+              let schemaFieldsInputs = '';
+              if (list.schema) {
+                list.schema.forEach(f => {
+                  const val = item.schemaValues ? item.schemaValues[f.id] : '';
+                  if (f.type === 'boolean') {
+                    schemaFieldsInputs += `
+                      <label class="checkbox-label" style="margin-top:10px;">
+                        <input type="checkbox" id="edit-schema-${item.id}-${f.id}" ${val ? 'checked' : ''}> ${escapeHtml(f.label)} (Liste)
+                      </label>`;
+                  } else {
+                    schemaFieldsInputs += `
+                      <div>
+                        <label>${escapeHtml(f.label)} (Liste)</label>
+                        <input type="text" id="edit-schema-${item.id}-${f.id}" value="${escapeHtml(val || '')}">
+                      </div>`;
+                  }
+                });
+              }
+
+              let localFieldsInputs = '';
+              if (item.localFields) {
+                item.localFields.forEach(f => {
+                  if (f.type === 'boolean') {
+                    localFieldsInputs += `
+                      <label class="checkbox-label" style="margin-top:10px;">
+                        <input type="checkbox" id="edit-local-${item.id}-${f.id}" ${f.value ? 'checked' : ''}> ${escapeHtml(f.label)} (Lokal)
+                      </label>`;
+                  } else {
+                    localFieldsInputs += `
+                      <div>
+                        <label>${escapeHtml(f.label)} (Lokal)</label>
+                        <input type="text" id="edit-local-${item.id}-${f.id}" value="${escapeHtml(f.value || '')}">
+                      </div>`;
+                  }
+                });
+              }
+
+              itemsHtml += `
+                <div class="item-card">
+                  <strong>Eintrag bearbeiten</strong>
+                  <div class="edit-form">
+                    <label>Titel / Name</label>
+                    <input type="text" id="edit-title-${item.id}" value="${escapeHtml(item.title)}">
+
+                    <div class="grid-2">
+                      <div>
+                        <label>Verantwortlich</label>
+                        <input type="text" id="edit-resp-${item.id}" value="${escapeHtml(item.verantwortlich || '')}" placeholder="z. B. Alex">
+                      </div>
+                      <div>
+                        <label>Wo zu besorgen</label>
+                        <input type="text" id="edit-where-${item.id}" value="${escapeHtml(item.woBesorgen || '')}" placeholder="z. B. Supermarkt">
+                      </div>
+                    </div>
+
+                    ${schemaFieldsInputs}
+                    ${localFieldsInputs}
+
+                    <label>Notizen</label>
+                    <textarea id="edit-notes-${item.id}" placeholder="Zusätzliche Infos...">${escapeHtml(item.notizen || '')}</textarea>
+
+                    <div style="margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between;">
+                      <button class="btn btn-secondary btn-sm" onclick="promptAddCustomField(${list.id}, ${item.id})">+ Feld hinzufügen</button>
+                      <div class="flex-row">
+                        <button class="btn btn-danger btn-sm" onclick="deleteItem(${list.id}, ${item.id})">Löschen</button>
+                        <button class="btn btn-sm" onclick="saveItem(${list.id}, ${item.id})">Fertig / Speichern</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+            } else {
+              // ANSICHTS MODUS
+              itemsHtml += `
+                <div class="item-card ${isAvailClass}">
+                  <div class="item-header">
+                    <div style="flex-grow:1;">
+                      <div class="item-title">${escapeHtml(item.title)}</div>
+                      <div class="meta-badges">${badges}</div>
+                    </div>
+                    <button class="btn btn-secondary btn-sm" onclick="toggleEdit(${list.id}, ${item.id})">✏️ Bearbeiten</button>
+                  </div>
+
+                  ${item.notizen ? `<div class="item-details">📝 ${escapeHtml(item.notizen)}</div>` : ''}
+
+                  <div style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center;">
+                    <label class="checkbox-label">
+                      <input type="checkbox" ${item.vorhanden ? 'checked' : ''} onchange="toggleVorhanden(${list.id}, ${item.id})">
+                      Ist vorhanden
+                    </label>
+                  </div>
+                </div>
+              `;
+            }
+          });
+        }
+
+        listEl.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 10px;">
+            <h2 style="margin: 0; font-size: 1.2rem;">${escapeHtml(list.title)}</h2>
+            <button class="btn btn-danger btn-sm" onclick="deleteList(${list.id})">Liste löschen</button>
+          </div>
+          <div>${itemsHtml}</div>
+          <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;" onclick="addItem(${list.id})">+ Neuer Eintrag</button>
+        `;
+
+        container.appendChild(listEl);
+      });
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+  </script>
+</body>
+</html>
