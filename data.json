@@ -269,6 +269,17 @@
           },
           "localFields": [],
           "isEditing": false
+        },
+        {
+          "id": 1785062810453,
+          "title": "Schlafsack",
+          "vorhanden": false,
+          "verantwortlich": "",
+          "woBesorgen": "",
+          "notizen": "",
+          "schemaValues": {},
+          "localFields": [],
+          "isEditing": false
         }
       ]
     }
