@@ -176,6 +176,17 @@
           "schemaValues": {},
           "localFields": [],
           "isEditing": false
+        },
+        {
+          "id": 1785062446190,
+          "title": "Wasserflaschen",
+          "vorhanden": false,
+          "verantwortlich": "",
+          "woBesorgen": "",
+          "notizen": "",
+          "schemaValues": {},
+          "localFields": [],
+          "isEditing": false
         }
       ]
     }
