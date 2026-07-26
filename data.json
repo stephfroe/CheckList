@@ -3,7 +3,13 @@
     {
       "id": 1785058549327,
       "title": "SummerBreeze",
-      "schema": [],
+      "schema": [
+        {
+          "id": "f_1785062581798",
+          "label": "Anzahl",
+          "type": "text"
+        }
+      ],
       "items": [
         {
           "id": 1785058550646,
@@ -217,7 +223,9 @@
           "verantwortlich": "",
           "woBesorgen": "",
           "notizen": "",
-          "schemaValues": {},
+          "schemaValues": {
+            "f_1785062581798": ""
+          },
           "localFields": [],
           "isEditing": false
         }
