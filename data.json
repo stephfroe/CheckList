@@ -59,6 +59,17 @@
           "schemaValues": {},
           "localFields": [],
           "isEditing": false
+        },
+        {
+          "id": 1785059553797,
+          "title": "Kaffezubereiter",
+          "vorhanden": false,
+          "verantwortlich": "",
+          "woBesorgen": "",
+          "notizen": "",
+          "schemaValues": {},
+          "localFields": [],
+          "isEditing": false
         }
       ]
     }
