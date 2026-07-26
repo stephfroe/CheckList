@@ -30,7 +30,7 @@
         {
           "id": 1785058684237,
           "title": "Pavillon",
-          "vorhanden": false,
+          "vorhanden": true,
           "verantwortlich": "Stephan",
           "woBesorgen": "",
           "notizen": "",
