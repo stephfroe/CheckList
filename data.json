@@ -120,8 +120,10 @@
           "vorhanden": true,
           "verantwortlich": "Stephan",
           "woBesorgen": "",
-          "notizen": "Brauchen wir einen Topf?",
-          "schemaValues": {},
+          "notizen": "",
+          "schemaValues": {
+            "f_1785062581798": ""
+          },
           "localFields": [],
           "isEditing": false
         },
