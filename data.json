@@ -288,6 +288,17 @@
           },
           "localFields": [],
           "isEditing": false
+        },
+        {
+          "id": 1786033180309,
+          "title": "Frenchpress",
+          "vorhanden": false,
+          "verantwortlich": "",
+          "woBesorgen": "",
+          "notizen": "",
+          "schemaValues": {},
+          "localFields": [],
+          "isEditing": false
         }
       ]
     }
