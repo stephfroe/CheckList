@@ -47,7 +47,7 @@
         {
           "id": 1785058719085,
           "title": "Gasgrill",
-          "vorhanden": false,
+          "vorhanden": true,
           "verantwortlich": "Kolja",
           "woBesorgen": "",
           "notizen": "Mit Gasflasche",
