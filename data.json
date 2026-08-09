@@ -279,7 +279,7 @@
         {
           "id": 1785062810453,
           "title": "Schlafsack",
-          "vorhanden": false,
+          "vorhanden": true,
           "verantwortlich": "Jeder",
           "woBesorgen": "",
           "notizen": "",
