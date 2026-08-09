@@ -152,7 +152,7 @@
         {
           "id": 1785061476926,
           "title": "Fleisch/Würstel",
-          "vorhanden": false,
+          "vorhanden": true,
           "verantwortlich": "",
           "woBesorgen": "",
           "notizen": "",
