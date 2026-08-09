@@ -141,7 +141,7 @@
         {
           "id": 1785061458256,
           "title": "Bier",
-          "vorhanden": false,
+          "vorhanden": true,
           "verantwortlich": "",
           "woBesorgen": "",
           "notizen": "",
