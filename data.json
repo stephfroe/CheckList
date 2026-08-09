@@ -266,7 +266,7 @@
         {
           "id": 1785062726176,
           "title": "Notfallapotheke",
-          "vorhanden": false,
+          "vorhanden": true,
           "verantwortlich": "",
           "woBesorgen": "",
           "notizen": "Kopfschmerztabletten\nFenistil\n?",
