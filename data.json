@@ -95,7 +95,7 @@
         {
           "id": 1785060620017,
           "title": "Kaffeepulver",
-          "vorhanden": false,
+          "vorhanden": true,
           "verantwortlich": "",
           "woBesorgen": "",
           "notizen": "",
