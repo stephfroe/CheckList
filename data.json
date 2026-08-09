@@ -194,7 +194,7 @@
         {
           "id": 1785062446190,
           "title": "Wasserflaschen",
-          "vorhanden": false,
+          "vorhanden": true,
           "verantwortlich": "",
           "woBesorgen": "",
           "notizen": "",
