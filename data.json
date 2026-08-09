@@ -253,7 +253,7 @@
         {
           "id": 1785062680278,
           "title": "Kopfbedeckung!!!",
-          "vorhanden": false,
+          "vorhanden": true,
           "verantwortlich": "Jeder",
           "woBesorgen": "",
           "notizen": "",
