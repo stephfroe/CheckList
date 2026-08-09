@@ -84,7 +84,7 @@
         {
           "id": 1785059879459,
           "title": "Toilettenpapier",
-          "vorhanden": false,
+          "vorhanden": true,
           "verantwortlich": "",
           "woBesorgen": "",
           "notizen": "",
